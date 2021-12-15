@@ -72,7 +72,7 @@ int AOpenCVReader::GetColorMode_CV() {
         break;
     case ETextureRenderTargetFormat::RTF_RGBA16f:
         UE_LOG(LogTemp, Warning, TEXT("16 bit not yet supported, Only 8 bit colour implemented currently will always return CV_8UC4"));
-        cvColorMode = CV_16FC4;
+        cvColorMode = CV_16UC4;
         break;
     case ETextureRenderTargetFormat::RTF_RGBA32f:
         UE_LOG(LogTemp, Warning, TEXT("32 bit not yet supported, Only 8 bit colour implemented currently will always return CV_8UC4"));
@@ -107,6 +107,7 @@ bool AOpenCVReader::ReadFrame() {
     if (!cvMat.empty())
         cv::imshow("Display", cvMat);
 
+    return true;
     //Wrapped in a render command for performance
     ENQUEUE_RENDER_COMMAND(WriteOpenCVTexture)(
         [RTarget = RenderTarget, RTexture = OpenCV_Texture2D, ColorD = ColorData](FRHICommandList& RHICmdList)

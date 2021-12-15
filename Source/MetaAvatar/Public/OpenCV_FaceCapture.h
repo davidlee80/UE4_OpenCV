@@ -2,14 +2,19 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "OpenCVHelper.h"
+OPENCV_INCLUDES_START
+#undef check // the check macro causes problems with opencv headers
 #include "opencv2/core.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/objdetect.hpp"
+OPENCV_INCLUDES_END
+
 #include "MediaTexture.h"
 #include "Runtime/Engine/Classes/Engine/Texture2D.h"
 #include "Runtime/Engine/Classes/Engine/TextureRenderTarget2D.h"
 #include "GameFramework/Actor.h"
+
 #include "OpenCV_FaceCapture.generated.h"
 
 UCLASS()

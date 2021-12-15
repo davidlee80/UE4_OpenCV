@@ -1,8 +1,14 @@
 // Copywrite Dukhart GNU v3.0
 #include "OpenCV_FaceCapture.h"
+
+OPENCV_INCLUDES_START
+#undef check 
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/videoio.hpp"
+OPENCV_INCLUDES_END
+
+
 
 // Sets default values
 AOpenCV_FaceCapture::AOpenCV_FaceCapture(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)

@@ -4,7 +4,7 @@ using UnrealBuildTool;
 
 public class MetaAvatar : ModuleRules
 {
-	string OPENCV_VERSION = "451";
+	string OPENCV_VERSION = "3416";
 	private string ThirdPartyPath
 	{
 		get
@@ -43,7 +43,8 @@ public class MetaAvatar : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(LibPath, "opencv_world" + OPENCV_VERSION + ".lib"));
             //Add Dynamic Libraries
             PublicDelayLoadDLLs.Add("opencv_world" + OPENCV_VERSION + ".dll");
-            PublicDelayLoadDLLs.Add("opencv_videoio_ffmpeg" + OPENCV_VERSION + "_64.dll");
+            //PublicDelayLoadDLLs.Add("opencv_videoio_ffmpeg" + OPENCV_VERSION + "_64.dll");
+            PublicDelayLoadDLLs.Add("opencv_ffmpeg" + OPENCV_VERSION + "_64.dll");
         }
         PublicDefinitions.Add(string.Format("WITH_OPENCV_BINDING={0}", isLibrarySupported ? 1 : 0));
         return isLibrarySupported;
@@ -51,16 +52,32 @@ public class MetaAvatar : ModuleRules
     public MetaAvatar(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PublicDependencyModuleNames.AddRange(new string[] 
+        { 
+            "Core", 
+            "CoreUObject", 
+            "Engine", 
+            "InputCore",
+            "RHI", 
+            "RenderCore", 
+            "Media", 
+            "MediaAssets"//,
+            //"OpenCVHelper", 
+            //"OpenCV" 
+        });
+		//PrivateDependencyModuleNames.AddRange(new string[] {  });
         // Uncomment if you are using Slate UI
-        PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+        PrivateDependencyModuleNames.AddRange(new string[] 
+        { 
+            "Slate", 
+            "SlateCore" 
+        });
         // Uncomment if you are using online features
         // PrivateDependencyModuleNames.Add("OnlineSubsystem");
         // To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
 
-        PublicDependencyModuleNames.AddRange(new string[] { "RHI", "RenderCore", "Media", "MediaAssets" });
+        //PublicDependencyModuleNames.AddRange(new string[] { "RHI", "RenderCore", "Media", "MediaAssets" });
 
         LoadOpenCV(Target);
-	}
+    }
 }

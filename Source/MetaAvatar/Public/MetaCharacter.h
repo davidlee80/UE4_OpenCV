@@ -2,9 +2,14 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "OpenCVHelper.h"
+OPENCV_INCLUDES_START
+#undef check // the check macro causes problems with opencv headers
 #include "opencv2/core.hpp"
+OPENCV_INCLUDES_END
+
+#include "GameFramework/Character.h"
+
 #include "MetaCharacter.generated.h"
 
 UCLASS()
